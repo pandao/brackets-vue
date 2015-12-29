@@ -15,7 +15,6 @@ __MACOSX
 
 # Directory
 
-/tests/
 /backup/
 /node_modules/
 /bower_components/
