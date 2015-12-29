@@ -6,7 +6,6 @@ define(function (require, exports, module) {
         MENU_LABEL         = "New *.vue",
         EXTENSION_NAME     = "Brackets Vue",
         VUE_CREATE_EXECUTE = "vue.create.execute",
-        bracketsVersion    = brackets.metadata.version.match(/^(\d+)\.(\d+)\.(\d+)\-(.*)$/),
         templateContent    = require("text!./template.vue"),
 
         AppInit            = brackets.getModule("utils/AppInit"),
@@ -17,13 +16,6 @@ define(function (require, exports, module) {
         EditorManager      = brackets.getModule("editor/EditorManager"),
         MainViewManager    = brackets.getModule("view/MainViewManager"),
 	    LanguageManager    = brackets.getModule("language/LanguageManager");
-    
-    function setCodeMirrorMode() {
-        var firstVer = parseInt(bracketsVersion[1]),
-            midVer   = parseInt(bracketsVersion[2]);
-        
-        return (firstVer >= 1 && midVer >= 5) ? "vue" : "htmlmixed";
-    }
 
     function createVueComponentFile() {
         var document = DocumentManager.createUntitledDocument(documentIndex++, FILE_EXT);
@@ -39,15 +31,20 @@ define(function (require, exports, module) {
         return new $.Deferred().resolve(document).promise();
     }
 
-    var MODE_NAME = setCodeMirrorMode();
-
-	LanguageManager.defineLanguage("vue", {
-		name: "Vue component file",
-		mode: MODE_NAME,
-		fileExtensions: ["vue"]
-	});
+	function setLanguage(mode) {
+		LanguageManager.defineLanguage("vue", {
+			name: "Vue component file",
+			mode: mode,
+			fileExtensions: ["vue"]
+		});
+	}
 
     AppInit.appReady(function () {
+		$.get("thirdparty/CodeMirror/mode/vue/vue.js").promise().then(function(){
+			setLanguage("vue");
+		}).fail(function(){
+			setLanguage("htmlmixed");
+		});
 
         CommandManager.register(MENU_LABEL, VUE_CREATE_EXECUTE, createVueComponentFile);
 
