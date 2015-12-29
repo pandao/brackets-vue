@@ -14,7 +14,7 @@ Thumbs.db
 __MACOSX
 
 # Directory
-
-/backup/
-/node_modules/
-/bower_components/
+tests/
+backup/
+node_modules/
+bower_components/
