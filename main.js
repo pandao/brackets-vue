@@ -8,8 +8,6 @@ define(function (require, exports, module) {
 		VUE_MODE_FILE_PATH = "/thirdparty/CodeMirror/mode/vue/vue.js",
 
 		documentIndex      = 1,
-        templateContent    = require("text!./template.vue"),
-
 		Menus              = brackets.getModule("command/Menus"),
         AppInit            = brackets.getModule("utils/AppInit"),
         Commands           = brackets.getModule("command/Commands"),
@@ -22,7 +20,9 @@ define(function (require, exports, module) {
 	    LanguageManager    = brackets.getModule("language/LanguageManager");
 
     function createVueComponentFile() {
-        var document = DocumentManager.createUntitledDocument(documentIndex++, FILE_EXT);
+        var templateContent = require("text!./template.vue"),
+            document        = DocumentManager.createUntitledDocument(documentIndex++, FILE_EXT);
+
         MainViewManager._edit(MainViewManager.ACTIVE_PANE, document);
 
         try {
@@ -32,7 +32,6 @@ define(function (require, exports, module) {
 				   templateContent, 
 				   activeEditor.getCursorPos()
 			   );
-
         } catch(e) {
             console.log(EXTENSION_NAME + " createVueComponentFile() : ", e);
         }
