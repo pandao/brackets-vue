@@ -8,12 +8,14 @@ define(function (require, exports, module) {
         VUE_CREATE_EXECUTE = "vue.create.execute",
         templateContent    = require("text!./template.vue"),
 
+		Menus              = brackets.getModule("command/Menus"),
         AppInit            = brackets.getModule("utils/AppInit"),
-        Menus              = brackets.getModule("command/Menus"),
         Commands           = brackets.getModule("command/Commands"),
+        FileUtils          = brackets.getModule("file/FileUtils"),
+        FileSystem         = brackets.getModule("filesystem/FileSystem"),
+        EditorManager      = brackets.getModule("editor/EditorManager"),
         CommandManager     = brackets.getModule("command/CommandManager"),
         DocumentManager    = brackets.getModule("document/DocumentManager"),
-        EditorManager      = brackets.getModule("editor/EditorManager"),
         MainViewManager    = brackets.getModule("view/MainViewManager"),
 	    LanguageManager    = brackets.getModule("language/LanguageManager");
 
@@ -39,13 +41,15 @@ define(function (require, exports, module) {
 		});
 	}
 
-    AppInit.appReady(function () {
-		$.get("thirdparty/CodeMirror/mode/vue/vue.js").promise().then(function(){
-			setLanguage("vue");
-		}).fail(function(){
-			setLanguage("htmlmixed");
-		});
+	var file = FileSystem.getFileForPath(
+        FileUtils.getNativeBracketsDirectoryPath() + "/thirdparty/CodeMirror/mode/vue/vue.js"
+    );
 
+    file.exists(function (err, exists) {
+		setLanguage((!err && exists) ? "vue" : "htmlmixed");
+    });
+
+    AppInit.appReady(function () {
         CommandManager.register(MENU_LABEL, VUE_CREATE_EXECUTE, createVueComponentFile);
 
         var fileMenu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
