@@ -20,6 +20,6 @@ Brackets extension for [Vue.js](http://vuejs.org/).
 
 ### License
 
-The [MIT](https://github.com/pandao/brackets-vue/LICENSE) license.
+The [MIT](https://github.com/pandao/brackets-vue/LICENSE) License.
 
 Copyright (c) 2015 Pandao
