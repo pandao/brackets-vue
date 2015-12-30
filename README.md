@@ -9,9 +9,11 @@ Brackets extension for [Vue.js](http://vuejs.org/).
 
 ### Install
 
-- Via Package Control: search for Brackets Vue.
-- Manual: clone this repo into your Brackets Packages folder.
+- Via Package Control: search package for Brackets Vue.
+- Manual: 
+    1. Clone this repository into your Brackets Packages folder.
+    2. Download this repository zip file, and drag to Brackets Packages Manager. 
 
 ### License
 
-The MIT license.
+The [MIT](https://github.com/pandao/brackets-vue/LICENSE) license.
