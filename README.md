@@ -2,6 +2,10 @@
 
 Brackets extension for [Vue.js](http://vuejs.org/).
 
+![https://pandao.github.io/brackets-vue/screenshot1.png](https://pandao.github.io/brackets-vue/screenshot1.png)
+
+![https://pandao.github.io/brackets-vue/screenshot2.png](https://pandao.github.io/brackets-vue/screenshot2.png)
+
 ### Features
 
 - Support creating `*.vue` file on Brackets MenuBar;
