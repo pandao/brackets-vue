@@ -2,9 +2,9 @@
 
 Brackets extension for [Vue.js](http://vuejs.org/).
 
-![https://pandao.github.io/brackets-vue/screenshot1.png](https://pandao.github.io/brackets-vue/screenshot1.png)
+![https://pandao.github.io/brackets-vue/screenshot1.png](https://pandao.github.io/brackets-vue/screenshot1.png "*.vue components file syntax highlighting")
 
-![https://pandao.github.io/brackets-vue/screenshot2.png](https://pandao.github.io/brackets-vue/screenshot2.png)
+![https://pandao.github.io/brackets-vue/screenshot2.png](https://pandao.github.io/brackets-vue/screenshot2.png "creating `*.vue` file")
 
 ### Features
 
