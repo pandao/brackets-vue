@@ -1,11 +1,13 @@
 define(function (require, exports, module) {
 	"use strict";
 
-    var documentIndex      = 1,
-        FILE_EXT           = ".vue",
+    var FILE_EXT           = ".vue",
         MENU_LABEL         = "New *.vue",
         EXTENSION_NAME     = "Brackets Vue",
         VUE_CREATE_EXECUTE = "vue.create.execute",
+		VUE_MODE_FILE_PATH = "/thirdparty/CodeMirror/mode/vue/vue.js",
+
+		documentIndex      = 1,
         templateContent    = require("text!./template.vue"),
 
 		Menus              = brackets.getModule("command/Menus"),
@@ -25,7 +27,12 @@ define(function (require, exports, module) {
 
         try {
            var activeEditor = EditorManager.getActiveEditor();
-               activeEditor.document.replaceRange(templateContent, activeEditor.getCursorPos());
+
+               activeEditor.document.replaceRange(
+				   templateContent, 
+				   activeEditor.getCursorPos()
+			   );
+
         } catch(e) {
             console.log(EXTENSION_NAME + " createVueComponentFile() : ", e);
         }
@@ -35,14 +42,14 @@ define(function (require, exports, module) {
 
 	function setLanguage(mode) {
 		LanguageManager.defineLanguage("vue", {
-			name: "Vue component file",
-			mode: mode,
-			fileExtensions: ["vue"]
+			name           : "Vue component file",
+			mode           : mode,
+			fileExtensions : ["vue"]
 		});
 	}
 
 	var file = FileSystem.getFileForPath(
-        FileUtils.getNativeBracketsDirectoryPath() + "/thirdparty/CodeMirror/mode/vue/vue.js"
+        FileUtils.getNativeBracketsDirectoryPath() + VUE_MODE_FILE_PATH
     );
 
     file.exists(function (err, exists) {
@@ -53,6 +60,12 @@ define(function (require, exports, module) {
         CommandManager.register(MENU_LABEL, VUE_CREATE_EXECUTE, createVueComponentFile);
 
         var fileMenu = Menus.getMenu(Menus.AppMenuBar.FILE_MENU);
-            fileMenu.addMenuItem(VUE_CREATE_EXECUTE, undefined, Menus.AFTER, Commands.FILE_NEW_UNTITLED);
+
+            fileMenu.addMenuItem(
+				VUE_CREATE_EXECUTE,
+				undefined,
+				Menus.AFTER,
+				Commands.FILE_NEW_UNTITLED
+			);
     });
 });

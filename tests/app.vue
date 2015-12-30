@@ -29,9 +29,12 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+$color : #ffcc00;
+
 .container {
   padding: 6px 12px;
   margin-bottom: 15px;
+  @include clearfix();
 
   h2 {
     font-size: 14px;
